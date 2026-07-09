@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07.10.2023 - Remember</title>
+    <style>
+        /* עיצוב כללי ורקע מדורג ועמוק */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #121212 0%, #1c1c1e 100%);
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* כפתור מחליף שפה בפינת המסך */
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            z-index: 10;
+        }
+        /* התאמת מיקום הכפתור כשהשפה היא אנגלית */
+        html[dir="ltr"] .lang-switcher {
+            left: auto;
+            right: 20px;
+        }
+        .lang-switcher:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffd700;
+        }
+
+        /* כרטיס מרכזי שממסגר את התוכן */
+        .main-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px); /* אפקט זכוכית */
+            max-width: 400px;
+            width: 85%;
+        }
+
+        /* אזור הלוגו */
+        .logo-container {
+            margin-bottom: 35px;
+        }
+
+        /* סמל הסרט הצהוב */
+        .ribbon-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0px 0px 10px rgba(255, 215, 0, 0.5));
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 5px 0;
+            color: #ffffff;
+        }
+
+        .sub-text {
+            font-size: 16px;
+            color: #cccccc;
+            margin: 10px 0 0 0;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        /* עיצוב ייחודי לפסקת התיאור הנוספת */
+        .description-text {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-top: 15px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* עיצוב הכפתור הראשי */
+        .btn-link {
+            display: inline-block;
+            padding: 16px 45px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #121212;
+            background-color: #ffd700;
+            text-decoration: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-link:hover {
+            background-color: #ffea00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-link:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="lang-switcher" onclick="toggleLanguage()" id="lang-btn">English</button>
+
+    <div class="main-card">
+        
+        <div class="logo-container">
+            <svg class="ribbon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C9.5 2 7.5 4 7.5 6.5C7.5 9.5 11 14.5 12 16C13 14.5 16.5 9.5 16.5 6.5C16.5 4 14.5 2 12 2Z" fill="#ffd700"/>
+                <path d="M12 16C10.5 14 6 22 4 22C5.5 22 9.5 17.5 12 16Z" fill="#ffd700"/>
+                <path d="M12 16C13.5 14 18 22 20 22C18.5 22 14.5 17.5 12 16Z" fill="#ffd700"/>
+            </svg>
+            <div class="logo-text">07.10.2023</div>
+            <p class="sub-text" id="sub-text">נזכור. ננצח.</p>
+            <p class="description-text" id="sub-desc">כל סרטוני הזוועות מטבח ה-7.10</p>
+        </div>
+
+        <a href="https://t.me/sevenoctoberhorror" class="btn-link" id="main-button">לחץ כאן למעבר</a>
+
+    </div>
+
+    <script>
+        // אובייקט המכיל את כל התרגומים בצורה מסודרת
+        const translations = {
+            he: {
+                dir: "rtl",
+                langBtn: "English",
+                subText: "נזכור. ננצח.",
+                subDesc: "כל סרטוני הזוועות מטבח ה-7.10",
+                mainButton: "לחץ כאן למעבר"
+            },
+            en: {
+                dir: "ltr",
+                langBtn: "עברית",
+                subText: "Remember. Overcome.",
+                subDesc: "All footage from the October 7 massacre.",
+                mainButton: "Click here to proceed"
+            }
+        };
+
+        let currentLang = 'he';
+
+        function toggleLanguage() {
+            // החלפת השפה הנוכחית
+            currentLang = currentLang === 'he' ? 'en' : 'he';
+            
+            const data = translations[currentLang];
+            const root = document.getElementById('html-root');
+            
+            // עדכון כיוון הדף והשפה בדפדפן
+            root.setAttribute('dir', data.dir);
+            root.setAttribute('lang', currentLang);
+            
+            // עדכון דינמי של כל הטקסטים במסך
+            document.getElementById('lang-btn').innerText = data.langBtn;
+            document.getElementById('sub-text').innerText = data.subText;
+            document.getElementById('sub-desc').innerText = data.subDesc;
+            document.getElementById('main-button').innerText = data.mainButton;
+        }
+    </script>
+
+</body>
+</html>
